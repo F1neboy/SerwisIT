@@ -15,7 +15,7 @@ public class Controller {
     @Autowired
     private ZleceniaRepo zleceniaRepo;
 
-    @GetMapping("/{id}")
+    @GetMapping("/zlecenie/{id}")
     public Optional<Zlecenia> getZlecenie(@PathVariable("id") Long id){
         return zleceniaRepo.findById(id);
     }

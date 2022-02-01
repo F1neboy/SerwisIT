@@ -14,7 +14,7 @@ export class ZleceniaService {
   constructor(private httpClient: HttpClient) { }
 
   public getZlecenia(id: number): Observable<Zlecenia>{
-    return this.httpClient.get<Zlecenia>(this.baseUrl+'/'+id);
+    return this.httpClient.get<Zlecenia>(this.baseUrl+'zlecenie/'+id);
   }
 
 }

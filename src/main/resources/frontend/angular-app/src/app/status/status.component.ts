@@ -18,7 +18,8 @@ export class StatusComponent implements OnInit {
         if(Number(phone)!=this.zlecTmp.phone)
           alert("Nie poprawne dane zlecenia!");
         else
-          this.router.navigate([''], {state: {zlecTmp: this.zlecTmp}});
+          alert("Is okay, numer zlecenie: "+this.zlecTmp.id+" Numer telefonu: "+this.zlecTmp.phone);
+          //this.router.navigate([''], {state: {zlecTmp: this.zlecTmp}});
       },
       (error: HttpErrorResponse) =>{
         alert("Nie poprawne dane zlecenia!");
