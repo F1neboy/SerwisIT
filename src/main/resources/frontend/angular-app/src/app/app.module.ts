@@ -8,13 +8,15 @@ import { NaprawaComponent } from './naprawa/naprawa.component';
 import { StatusComponent } from './status/status.component';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import { StatusdescriptionComponent } from './statusdescription/statusdescription.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NaprawaComponent,
-    StatusComponent
+    StatusComponent,
+    StatusdescriptionComponent
   ],
   imports: [
     BrowserModule,

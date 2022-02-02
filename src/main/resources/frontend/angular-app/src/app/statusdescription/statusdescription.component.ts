@@ -2,30 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import {ZleceniaService} from "../service/zlecenia.service";
 import {Router} from "@angular/router";
 import {Zlecenia} from "../../zlecenia";
-import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
-  selector: 'app-status',
-  templateUrl: './status.component.html',
-  styleUrls: ['./status.component.css']
+  selector: 'app-statusdescription',
+  templateUrl: './statusdescription.component.html',
+  styleUrls: ['./statusdescription.component.css']
 })
-export class StatusComponent implements OnInit {
+export class StatusdescriptionComponent implements OnInit {
 
-  sprawdzZlec(phone: string, idnum: string): void{
-    this.zlecServ.getZlecenia(Number(idnum)).subscribe(
-      (response: Zlecenia) => {
-        this.zlecTmp=response;
-        if(Number(phone)!=this.zlecTmp.phone)
-          alert("Nie poprawne dane zlecenia!");
-        else
-          //alert("Is okay, numer zlecenie: "+this.zlecTmp.id+" Numer telefonu: "+this.zlecTmp.phone);
-          this.router.navigate(['statusdesc'], {state: {zlecTmp: this.zlecTmp}});
-      },
-      (error: HttpErrorResponse) =>{
-        alert("Nie poprawne dane zlecenia!");
-      }
-    )
-  }
+
+  nam: string=history.state.zlecTmp.name;
+  surn: string=history.state.zlecTmp.surname;
+  id: number=history.state.zlecTmp.id;
+  mail: string=history.state.zlecTmp.mail;
+  phone: number=history.state.zlecTmp.phone;
+  category: string=history.state.zlecTmp.category;
+  description: string=history.state.zlecTmp.description;
 
   loadScripts() {
     const dynamicScripts = [
@@ -46,13 +38,11 @@ export class StatusComponent implements OnInit {
       document.getElementsByTagName('head')[0].appendChild(node);
     }
   }
-  constructor(private zlecServ: ZleceniaService, private router: Router) {
+  constructor() {
     this.loadScripts();
   }
 
   public zlecTmp!: Zlecenia;
-
-
   ngOnInit(): void {
   }
 
