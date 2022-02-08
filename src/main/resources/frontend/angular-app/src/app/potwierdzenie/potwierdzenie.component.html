@@ -1,44 +1,40 @@
 <!-- Wrapper -->
 <div id="wrapper">
+
   <!-- Header -->
   <header id="header" class="alt">
     <span class="logo"><img src="../../assets/images/logo.svg" alt="" height="125px"/></span>
     <h1>Serwis</h1>
-    <p>Sprawdź status zlecenia</p>
+    <p>Potwierdzenie zgłoszenia naprawy</p>
   </header>
 
-
+  <!-- Main -->
   <div id="main">
+
     <!-- Content -->
     <section id="content" class="main">
 
-        <h3>Zlecenie numer: {{id}}</h3>
-
-        <div class="col-6 col-12-medium">
-
-          <dl class="alt">
-            <dt>Status:</dt>
-            <dd>{{status}}</dd>
-            <dt>Imie:</dt>
-            <dd>{{nam}}</dd>
-            <dt>Nazwisko:</dt>
-            <dd>{{surn}}</dd>
-            <dt>Nr. tel:</dt>
-            <dd>{{phone}}</dd>
-            <dt>E-mail</dt>
-            <dd>{{mail}}</dd>
-            <dt>Problem</dt>
-            <dd>{{description}}</dd>
-            <dt *ngIf="servShow">Wiadomość serwisu</dt>
-            <dd *ngIf="servShow">{{servdesc}}</dd>
-          </dl>
-
-        </div>
-
       <ul class="actions small">
-        <li><a href="#" routerLink="" class="button primary small">Wróć</a></li>
+        <li><a href="" routerLink="" class="button primary small">Wróć</a></li>
       </ul>
+
+      <h1>Dziękujemy za złożenie zlecenia</h1>
+      <h3>W ciagu 2 dni roboczy nasz serwis przeanalizuje twoje zlecenie i wyśle odpowiedź na email</h3>
+      <h3>Dodatkowo na naszej stronie możesz na bierząco analizować status Twojego zlecenia</h3>
+      <h4><i>Dane zlecenia:</i></h4>
+      <blockquote>
+        <p>Numer zlecenia: {{id}}</p>
+        <p>Imie: {{nam}}</p>
+        <p>Nazwisko: {{surn}}</p>
+        <p>Email: {{mail}}</p>
+        <p>Numer telefonu: {{phone}}</p>
+        <p>Kategoria: {{category}}</p>
+        <p>Problem: {{description}}</p>
+        <p>Obecny status: {{status}}</p>
+      </blockquote>
+
     </section>
+
   </div>
 
   <!-- Footer -->

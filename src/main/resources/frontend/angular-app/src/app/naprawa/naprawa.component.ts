@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Zlecenia} from "../../zlecenia";
+import {Router} from "@angular/router";
+import {ZleceniaService} from "../services/zlecenia.service";
 
 @Component({
   selector: 'app-naprawa',
@@ -6,6 +9,43 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./naprawa.component.css']
 })
 export class NaprawaComponent implements OnInit {
+
+  private zlecenieTmp: Zlecenia={
+    id: 0,
+    name: "",
+    surname: "",
+    phone: 0,
+    mail: "",
+    category: "",
+    description: "",
+    status:"Zlecenie przyjęte do analizy",
+    servicedesc: ""
+  };
+
+  private zlecenieH!: Zlecenia;
+
+  public addZlecenie(name: string, surname: string, phone: string, mail: string, cat: string, probdesc: string){
+    this.zlecenieTmp.name=name;
+    this.zlecenieTmp.surname=surname;
+    this.zlecenieTmp.phone=Number(phone);
+    this.zlecenieTmp.mail=mail;
+    this.zlecenieTmp.category=cat;
+    this.zlecenieTmp.description=probdesc;
+
+    this.zleceniaService.addZlecenie(this.zlecenieTmp).subscribe(
+      (response: Zlecenia) =>{
+        this.zlecenieH=response;
+        this.route.navigate(["potwierdzenie"], {state: {zlecTmp: this.zlecenieH}})
+      }
+
+    )
+
+  }
+
+
+
+
+
   loadScripts() {
     const dynamicScripts = [
       "../assets/js/jquery.min.js",
@@ -26,7 +66,7 @@ export class NaprawaComponent implements OnInit {
     }
   }
 
-  constructor() { }
+  constructor( private route: Router, private zleceniaService: ZleceniaService) { }
 
   ngOnInit(): void {
   }

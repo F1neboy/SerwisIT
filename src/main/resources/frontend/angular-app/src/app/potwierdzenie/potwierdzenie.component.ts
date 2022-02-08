@@ -1,16 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {ZleceniaService} from "../services/zlecenia.service";
-import {Router} from "@angular/router";
-import {Zlecenia} from "../../zlecenia";
 
 @Component({
-  selector: 'app-statusdescription',
-  templateUrl: './statusdescription.component.html',
-  styleUrls: ['./statusdescription.component.css']
+  selector: 'app-potwierdzenie',
+  templateUrl: './potwierdzenie.component.html',
+  styleUrls: ['./potwierdzenie.component.css']
 })
-export class StatusdescriptionComponent implements OnInit {
+export class PotwierdzenieComponent implements OnInit {
 
-  status: string=history.state.zlecTmp.status;
   nam: string=history.state.zlecTmp.name;
   surn: string=history.state.zlecTmp.surname;
   id: number=history.state.zlecTmp.id;
@@ -18,10 +14,7 @@ export class StatusdescriptionComponent implements OnInit {
   phone: number=history.state.zlecTmp.phone;
   category: string=history.state.zlecTmp.category;
   description: string=history.state.zlecTmp.description;
-  servdesc: string=history.state.zlecTmp.servdesc;
-
-  servShow=false;
-
+  status: string=history.state.zlecTmp.status;
 
   loadScripts() {
     const dynamicScripts = [
@@ -41,17 +34,10 @@ export class StatusdescriptionComponent implements OnInit {
       node.charset = 'utf-8';
       document.getElementsByTagName('head')[0].appendChild(node);
     }
-    if(this.servdesc)
-      this.servShow=true
-    else
-      this.servShow=false;
-
   }
   constructor() {
     this.loadScripts();
   }
-
-  public zlecTmp!: Zlecenia;
   ngOnInit(): void {
   }
 

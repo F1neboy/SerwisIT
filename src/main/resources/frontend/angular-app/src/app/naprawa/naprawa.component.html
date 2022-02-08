@@ -22,48 +22,40 @@
         <div class="row gtr-uniform">
 
           <div class="col-6 col-12-xsmall">
-            <input type="text" name="imie" id="imie" value="" placeholder="Imię" />
+            <input type="text" name="imie" id="imie" value="" placeholder="Imię" #name/>
           </div>
           <div class="col-6 col-12-xsmall">
-            <input type="text" name="nazwisko" id="nazwisko" value="" placeholder="Nazwisko" />
+            <input type="text" name="nazwisko" id="nazwisko" value="" placeholder="Nazwisko" #surname/>
           </div>
 
           <div class="col-6 col-12-xsmall">
-            <input type="text" name="phone" id="phone" value="" placeholder="Numer telefonu" />
+            <input type="text" name="phone" id="phone" value="" placeholder="Numer telefonu" #phone/>
           </div>
           <div class="col-6 col-12-xsmall">
-            <input type="email" name="email" id="email" value="" placeholder="E-mail" />
+            <input type="email" name="email" id="email" value="" placeholder="E-mail" #mail/>
           </div>
 
           <div class="col-12">
-            <select name="demo-category" id="demo-category">
+            <select name="demo-category" id="demo-category" #cat>
               <option value="">- Kategoria -</option>
-              <option value="1">Komputer stacjonarny</option>
-              <option value="1">Laptop</option>
-              <option value="1">Telefon</option>
-              <option value="1">Konsola</option>
+              <option value="Komputer stacjonarny">Komputer stacjonarny</option>
+              <option value="Laptop">Laptop</option>
+              <option value="Telefon">Telefon</option>
+              <option value="Konsola">Konsola</option>
             </select>
           </div>
 
-          <div class="col-6 col-12-small">
-            <input type="checkbox" id="copy" name="copy">
-            <label for="copy">Wyślij kopie na maila</label>
-          </div>
-
           <div class="col-12">
-            <textarea name="message" id="message" placeholder="Opisz swój problem" rows="6"></textarea>
+            <textarea name="message" id="message" placeholder="Wpisz dane swojego modelu i opisz swój problem" rows="6" #probdesc></textarea>
           </div>
           <div class="col-12">
             <ul class="actions">
-              <li><input type="submit" value="Wyślij" class="primary" /></li>
+              <li><input type="submit" value="Wyślij" class="primary" (click)="addZlecenie(name.value, surname.value, phone.value, mail.value, cat.value, probdesc.value)"/></li>
               <li><input type="reset" value="Resetuj" /></li>
             </ul>
           </div>
         </div>
       </form>
-
-
-
     </section>
 
   </div>

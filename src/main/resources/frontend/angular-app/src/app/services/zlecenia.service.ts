@@ -17,4 +17,16 @@ export class ZleceniaService {
     return this.httpClient.get<Zlecenia>(this.baseUrl+'zlecenie/'+id);
   }
 
+  public getZleceniaAll(): Observable<Zlecenia[]>{
+    return this.httpClient.get<Zlecenia[]>(this.baseUrl+'zlecenie/all');
+  }
+
+  public addZlecenie(zlecenia: Zlecenia): Observable<Zlecenia>{
+    return this.httpClient.post<Zlecenia>(this.baseUrl+'zlecenie/add', zlecenia);
+  }
+
+  public setZlecenie(id: number, zlecenie: Zlecenia): Observable<Zlecenia>{
+    return this.httpClient.put<Zlecenia>(this.baseUrl+'setzlecenie/'+id, zlecenie)
+  }
+
 }

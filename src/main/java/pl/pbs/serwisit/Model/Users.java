@@ -10,17 +10,15 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name="Zlecenia")
-public class Zlecenia {
+@Table(name="Users")
+public class Users {
     @Id
     @GeneratedValue
     private Long id;
-    private String name;
-    private String surname;
+    private String imie;
+    private String nazwisko;
+    private boolean isAdmin;
+    private Long userphone;
     private String mail;
-    private Long phone;
-    private String category;
-    private String description;
-    private String Status;
-    private String serviceDesc;
+    private String pass;
 }

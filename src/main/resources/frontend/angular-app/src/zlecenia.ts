@@ -6,4 +6,6 @@ mail: string;
 phone: number;
 category: string;
 description: string;
+status: string;
+servicedesc: string;
 }

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {ZleceniaService} from "../service/zlecenia.service";
+import {ZleceniaService} from "../services/zlecenia.service";
 import {Router} from "@angular/router";
 import {Zlecenia} from "../../zlecenia";
 import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
-  selector: 'app-status',
-  templateUrl: './status.component.html',
-  styleUrls: ['./status.component.css']
+  "selector": 'app-status',
+  "templateUrl": './status.component.html',
+  "styleUrls": ['./status.component.css']
 })
 export class StatusComponent implements OnInit {
 

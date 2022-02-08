@@ -1,0 +1,79 @@
+<div id="wrapper">
+
+
+  <header id="header" class="alt">
+    <span class="logo"><img src="../../assets/images/logo.svg" alt="" height="125px"/></span>
+    <h1>Serwis</h1>
+    <p>Logowanie do serwisu</p>
+  </header>
+
+  <!-- Main -->
+  <div id="main">
+
+    <!-- Content -->
+    <section id="content" class="main">
+
+      <ul class="actions small">
+        <li><a routerLink="" class="button primary small">Wróć</a></li>
+      </ul>
+
+      <h2>Logowanie</h2>
+      <form #lofinForm="ngForm" method="post" action="#">
+
+        <div class="row gtr-uniform">
+          <div>
+            <input type="email" ngModel name="email" id="email" value="" placeholder="Email" #mail required/> <br />
+            <input type="password" ngModel name="demo-name" id="demo-name" value="" placeholder="Hasło" #pass required/>
+          </div>
+          <div class="col-12">
+            <ul class="actions">
+              <li><input [disabled]="lofinForm.invalid" type="submit" value="Zaloguj" class="primary" (click)="checkLogin(mail.value, pass.value)"/></li>
+              <li><input type="reset" value="Resetuj" /></li>
+            </ul>
+          </div>
+        </div>
+
+      </form>
+      <hr>
+      <h4>Jeżeli nie masz konta, skorzystaj z poniższego formularza aby się zarejestrować</h4>
+      <form #addform="ngForm" action="#" method="post">
+        <div class="row gtr-uniform">
+          <div>
+          <input type="email" ngModel name="email2" id="email2" value="" placeholder="Email" #mailer required/> <br />
+          <input type="password" ngModel name="pass1" id="pass1" value="" placeholder="Hasło" #passer required/> <br />
+          <input type="password" ngModel name="pass2" id="pass2" value="" placeholder="Powtórz hasło" #pass2r required/><br>
+          <input type="text" ngModel name="imie" id="imie" value="" placeholder="Imie" #name required/> <br />
+          <input type="text" ngModel name="nazwisko" id="nazwisko" value="" placeholder="Nazwisko" #surr required/> <br />
+          <input type="text" ngModel name="telefon" id="telefon" value="" placeholder="Numer telefonu" #phonier required/> <br />
+          </div></div>
+        <div class="col-12">
+          <ul class="actions">
+            <li><input [disabled]="addform.invalid" type="submit" value="Zerejestruj" class="primary" (click)="addUser(mailer.value, passer.value, pass2r.value, name.value, surr.value, phonier.value); addform.reset()"/></li>
+            <li><input type="reset" value="Resetuj" /></li>
+          </ul>
+        </div>
+      </form>
+
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer id="footer">
+
+    <section>
+      <h2>Kontakt</h2>
+
+      <dl class="alt">
+        <dt>Adres</dt>
+        <dd>ul. Klemensa Janickiego 1 &bull; Żnin &bull; 88-400</dd>
+        <dt>Nr. tel.</dt>
+        <dd>999-999-999</dd>
+        <dt>E-mail</dt>
+        <dd><a href="#">serwis@gmail.com</a></dd>
+      </dl>
+    </section>
+    <p class="copyright">&copy; PROJEKT ZPO</p>
+  </footer>
+
+</div>

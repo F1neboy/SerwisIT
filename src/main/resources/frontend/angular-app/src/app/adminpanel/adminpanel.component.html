@@ -1,0 +1,222 @@
+<!-- Wrapper -->
+<div id="wrapper">
+
+  <header id="header" class="alt">
+    <span class="logo"><img src="../../assets/images/logo.svg" alt="" height="125px"/></span>
+    <h1>Serwis</h1>
+    <p>Admin Panel</p>
+  </header>
+
+  <!-- Nav -->
+  <nav id="nav">
+    <ul>
+      <li><a (click)="allZlec()">Zlecenia</a></li>
+      <li><a (click)="allUsers()">Użytkownicy</a></li>
+      <li style="list-style-type:none;">
+        <a routerLink="" class="button primary small">Wyloguj</a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Main -->
+  <div id="main">
+    <section style="padding-top: 3%" *ngIf="allZlecShow">
+      <ul class="actions special">
+        <li><a class="button small" (click)="searchZlecenia('')">Wszystkie</a></li>
+        <li><a class="button small" (click)="searchZlecenia('Zlecenie przyjęte do analizy')">Do analizy</a></li>
+        <li><a class="button small" (click)="searchZlecenia('Zlecenie w trakcie realizacji')">W trakcie</a></li>
+        <li><a class="button small" (click)="searchZlecenia('Gotowe do odbioru')">Gotowe do odbioru</a></li>
+        <li><a class="button small" (click)="searchZlecenia('Zakończone')">Zakończone</a></li>
+      </ul>
+    </section>
+    <section class="main special" *ngIf="allZlecShow">
+      <div class="table-wrapper">
+        <table class="alt">
+          <thead>
+          <tr>
+            <th>Id</th>
+            <th>Kategoria</th>
+            <th>Nr telefonu</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let zlecenie of zlecenia | async">
+            <td>{{zlecenie?.id}}</td>
+            <td>{{zlecenie?.category}}</td>
+            <td>{{zlecenie?.phone}}</td>
+            <td>{{zlecenie?.status}}</td>
+            <td>
+              <li style="list-style-type:none;">
+                <a (click)="currZlec(zlecenie.id)" class="button primary fit">Szczegóły</a>
+              </li>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section style="padding-top: 3%" *ngIf="allUsersShow">
+      <ul class="actions special">
+        <li><a class="button small" (click)="searchUsers('all')">Wszyscy</a></li>
+        <li><a class="button small" (click)="searchUsers('admin')">Administratorzy</a></li>
+        <li><a class="button small" (click)="searchUsers('normal')">Klienci</a></li>
+      </ul>
+    </section>
+    <section class="main special" *ngIf="allUsersShow">
+      <div class="table-wrapper">
+        <table class="alt">
+          <thead>
+          <tr>
+            <th>Id</th>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Administrator</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let user of users | async">
+            <td>{{user?.id}}</td>
+            <td>{{user?.imie}}</td>
+            <td>{{user?.nazwisko}}</td>
+            <td>{{user?.admin?'Tak':'Nie'}}</td>
+            <td>
+              <li style="list-style-type:none;">
+                <a (click)="currUser(user.id)" class="button primary fit">Szczegóły</a>
+              </li>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <!--Szczegóły zlecenia-->
+    <section id="content" class="main" *ngIf="currZlecShow">
+      <h3>Zlecenie numer: {{zlecTmp.id}}</h3>
+      <div class="col-6 col-12-medium">
+        <dl class="alt">
+          <form>
+            <dt>Imie:</dt>
+            <dd>
+              <div class="col-6">
+                <input type="text" value="{{zlecTmp.name}}" #zlecimie/>
+              </div>
+            </dd>
+            <dt>Nazwisko:</dt>
+            <dd>
+              <div class="col-6">
+                <input type="text" value="{{zlecTmp.surname}}" #zlecnazwi/>
+              </div>
+            </dd>
+            <dt>Nr. tel:</dt>
+            <dd>
+              <div class="col-6">
+                <input type="text" value="{{zlecTmp.phone}}" #zlecphone/>
+              </div>
+            </dd>
+            <dt>E-mail</dt>
+            <dd>
+              <div class="col-6">
+                <input type="email" value="{{zlecTmp.mail}}" #zlecmail/>
+              </div>
+            </dd>
+            <dt>Problem</dt>
+            <dd>
+              <div>
+                <textarea rows="4" #zlecdesc>{{zlecTmp.description}}</textarea>
+              </div>
+            </dd>
+            <dt>Status:</dt>
+            <dd>
+              <div class="col-6">
+                <select name="status" #zlecstatus>
+                  <option [selected]="zlecTmp.status=='Zlecenie przyjęte do analizy'" value="Zlecenie przyjęte do analizy">Zlecenie przyjęte do analizy</option>
+                  <option [selected]="zlecTmp.status=='Zlecenie w trakcie realizacji'" value="Zlecenie w trakcie realizacji">Zlecenie w trakcie realizacji</option>
+                  <option [selected]="zlecTmp.status=='Gotowe do odbioru'" value="Gotowe do odbioru">Gotowe do odbioru</option>
+                  <option [selected]="zlecTmp.status=='Zakończone'" value="Zakończone">Zakończone</option>
+                </select>
+              </div>
+            </dd>
+            <dt>Informacja serwisu</dt>
+            <dd>
+              <div>
+                <textarea rows="4" #zlecsvdesc>{{zlecTmp!.servicedesc}}</textarea>
+              </div>
+            </dd>
+
+            <div class="col-12">
+              <ul class="actions">
+                <li><input type="submit" value="Zapisz" class="primary" (click)="setZlecenie(zlecimie.value, zlecnazwi.value, zlecphone.value, zlecmail.value, zlecdesc.value, zlecstatus.value, zlecsvdesc.value)"/></li>
+                <li><input type="button" value="Wróć" class="primary" (click)="allZlec()"/></li>
+              </ul>
+            </div>
+          </form>
+        </dl>
+      </div>
+    </section>
+    <!--Szczegóły usera-->
+    <section id="content" class="main" *ngIf="currUserShow">
+      <div class="col-6 col-12-medium">
+        <h3>Użytkownik nr: {{userTmp.id}}</h3>
+        <dl class="alt">
+          <form>
+            <dt>Imie:</dt>
+            <dd>
+              <div class="col-6">
+                <input type="text" value="{{userTmp.imie}}" #userimie/>
+              </div>
+            </dd>
+            <dt>Nazwisko:</dt>
+            <dd>
+              <div class="col-6">
+                <input type="text" value="{{userTmp.nazwisko}}" #usernazwisko/>
+              </div>
+            </dd>
+            <dt>Nr. tel:</dt>
+            <dd>
+              <div class="col-6">
+                <input type="text" value="{{userTmp.userphone}}" #userphone/>
+              </div>
+            </dd>
+            <dt>E-mail</dt>
+            <dd>
+              <div class="col-6">
+                <input type="email" value="{{userTmp.mail}}" #usermail/>
+              </div>
+            </dd>
+            <dt>Hasło:</dt>
+            <dd>
+              <div class="col-6">
+                <input type="text" value="{{userTmp.pass}}" #userpass/>
+              </div>
+            </dd>
+            <dt>Admin: </dt>
+            <dd>
+              <div class="col-6">
+                <select name="status" #admin>
+                  <option [selected]="userTmp.admin" value="tak">Tak</option>
+                  <option [selected]="!userTmp.admin" value="nie">Nie</option>
+                </select>
+              </div>
+            </dd>
+            <div class="col-12">
+              <ul class="actions">
+                <li><input type="submit" value="Zapisz" class="primary" (click)="setUser(userimie.value, usernazwisko.value, userphone.value, usermail.value, userpass.value, admin.value)"/></li>
+                <li><input type="button" value="Wróć" class="primary" (click)="allUsers()"/></li>
+              </ul>
+            </div>
+          </form>
+        </dl>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer id="footer">
+    <p class="copyright">&copy; PROJEKT ZPO</p>
+  </footer>
+
+</div>

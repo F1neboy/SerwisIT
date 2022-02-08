@@ -1,0 +1,147 @@
+<!-- Wrapper -->
+<div id="wrapper">
+
+  <header id="header" class="alt">
+    <span class="logo"><img src="../../assets/images/logo.svg" alt="" height="125px"/></span>
+    <h1>Serwis</h1>
+    <p>Witaj {{userTmp.imie}}</p>
+  </header>
+
+  <!-- Nav -->
+  <nav id="nav">
+    <ul>
+      <li><a (click)="sAddZlec()">Dodaj zlecenie</a></li>
+      <li><a (click)="sZlecenia()">Moje zlecenia</a></li>
+      <li><a (click)="sDane()">Moje dane</a></li>
+      <li style="list-style-type:none;">
+        <a routerLink="" class="button primary small">Wyloguj</a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Main -->
+  <div id="main">
+    <section *ngIf="zlecShow" style="padding-top: 3%">
+      <ul class="actions special">
+        <li><a class="button small" (click)="searchZlecenia('')">Wszystkie</a></li>
+        <li><a class="button small" (click)="searchZlecenia('Zlecenie przyjęte do analizy')">Do analizy</a></li>
+        <li><a class="button small" (click)="searchZlecenia('Zlecenie w trakcie realizacji')">W trakcie</a></li>
+        <li><a class="button small" (click)="searchZlecenia('Gotowe do odbioru')">Gotowe do odbioru</a></li>
+        <li><a class="button small" (click)="searchZlecenia('Zakończone')">Zakończone</a></li>
+      </ul>
+    </section>
+    <section class="main special" *ngIf="zlecShow">
+      <div class="table-wrapper">
+        <table class="alt">
+          <thead>
+          <tr>
+            <th>Id</th>
+            <th>Kategoria</th>
+            <th>Opis problemu</th>
+            <th>Status</th>
+            <th>Informacja z serwisu</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let zlecenie of zlecenia | async">
+            <td>{{zlecenie?.id}}</td>
+            <td>{{zlecenie?.category}}</td>
+            <td>{{zlecenie?.description}}</td>
+            <td>{{zlecenie?.status}}</td>
+            <td>{{zlecenie!.servicedesc}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section id="content" class="main" *ngIf="userShow">
+      <div class="col-6 col-12-medium">
+        <dl class="alt">
+          <form>
+            <dt>Imie:</dt>
+            <dd>
+              <div class="col-6">
+                <input type="text" value="{{userTmp.imie}}" #imie/>
+              </div>
+            </dd>
+            <dt>Nazwisko:</dt>
+            <dd>
+              <div class="col-6">
+                <input type="text" value="{{userTmp.nazwisko}}" #nazwisko/>
+              </div>
+            </dd>
+            <dt>Nr. tel:</dt>
+            <dd>
+              <div class="col-6">
+                <input type="text" value="{{userTmp.userphone}}" #userphone/>
+              </div>
+            </dd>
+            <dt>E-mail</dt>
+            <dd>
+              <div class="col-6">
+                <input type="email" value="{{userTmp.mail}}" #mail/>
+              </div>
+            </dd>
+            <dt>Hasło:</dt>
+            <dd>
+              <div class="col-6">
+                <input type="text" value="{{userTmp.pass}}" #pass/>
+              </div>
+            </dd>
+            <div class="col-12">
+              <ul class="actions">
+                <li><input type="submit" value="Zapisz" class="primary" (click)="setUser(imie.value, nazwisko.value, userphone.value, mail.value, pass.value)"/></li>
+              </ul>
+            </div>
+          </form>
+        </dl>
+      </div>
+    </section>
+    <section id="content" class="main" *ngIf="addZlecShow">
+      <form method="post" action="#">
+        <div class="row gtr-uniform">
+
+          <div class="col-6 col-12-xsmall">
+            <input type="text" name="imie" id="imie" value="" placeholder="Imię" #name/>
+          </div>
+          <div class="col-6 col-12-xsmall">
+            <input type="text" name="nazwisko" id="nazwisko" value="" placeholder="Nazwisko" #surname/>
+          </div>
+
+          <div class="col-6 col-12-xsmall">
+            <input type="text" name="phone" id="phone" value="" placeholder="Numer telefonu" #phone/>
+          </div>
+          <div class="col-6 col-12-xsmall">
+            <input type="email" name="email" id="email" value="" placeholder="E-mail" #mail/>
+          </div>
+
+          <div class="col-12">
+            <select name="demo-category" id="demo-category" #cat>
+              <option value="">- Kategoria -</option>
+              <option value="Komputer stacjonarny">Komputer stacjonarny</option>
+              <option value="Laptop">Laptop</option>
+              <option value="Telefon">Telefon</option>
+              <option value="Konsola">Konsola</option>
+            </select>
+          </div>
+
+          <div class="col-12">
+            <textarea name="message" id="message" placeholder="Wpisz dane swojego modelu i opisz swój problem" rows="6" #probdesc></textarea>
+          </div>
+          <div class="col-12">
+            <ul class="actions">
+              <li><input type="submit" value="Wyślij" class="primary" (click)="addZlecenie(name.value, surname.value, phone.value, mail.value, cat.value, probdesc.value)"/></li>
+              <li><input type="reset" value="Resetuj" /></li>
+            </ul>
+          </div>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer id="footer">
+    <p class="copyright">&copy; PROJEKT ZPO</p>
+  </footer>
+
+</div>
