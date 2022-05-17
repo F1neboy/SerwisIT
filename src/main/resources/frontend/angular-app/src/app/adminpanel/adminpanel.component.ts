@@ -50,7 +50,6 @@ export class AdminpanelComponent implements OnInit {
 
   users!: Observable<Users[]>;
   zlecenia!: Observable<Zlecenia[]>;
-
   public searchUsers(status: String){
     this.userService.getUsers().subscribe(
       (response: Users[])=>{
@@ -62,6 +61,17 @@ export class AdminpanelComponent implements OnInit {
           this.users=of(response);
       }
     )
+  }
+  public searchZlecenia(status: String){
+    this.zleceniaService.getZleceniaAll().subscribe(
+      (response: Zlecenia[])=>{
+        if(status!="") {
+          this.zlecenia=of(response.filter(i => i.status == status));
+        }
+        else
+          this.zlecenia=of(response);
+      }
+    );
   }
 
   userTmp!: Users;
@@ -114,17 +124,6 @@ export class AdminpanelComponent implements OnInit {
     )
   }
 
-  public searchZlecenia(status: String){
-    this.zleceniaService.getZleceniaAll().subscribe(
-      (response: Zlecenia[])=>{
-        if(status!="") {
-          this.zlecenia=of(response.filter(i => i.status == status));
-        }
-        else
-          this.zlecenia=of(response);
-      }
-    );
-  }
 
   loadScripts() {
     const dynamicScripts = [

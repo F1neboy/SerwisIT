@@ -14,8 +14,6 @@ import {HttpErrorResponse} from "@angular/common/http";
 })
 export class ClientpanelComponent implements OnInit {
 
-  zlecenia!: Observable<Zlecenia[]>;
-  userTmp: Users= history.state.userTmp;
   zlecShow=true;
   userShow=false
   addZlecShow=false;
@@ -48,6 +46,21 @@ export class ClientpanelComponent implements OnInit {
     servicedesc: ""
   };
 
+  zlecenia!: Observable<Zlecenia[]>;
+  userTmp: Users= history.state.userTmp;
+
+  public searchZlecenia(status: String){
+    this.zleceniaService.getZleceniaAll().subscribe(
+      (response: Zlecenia[])=>{
+        if(status!="") {
+          this.zlecenia=of(response.filter(i => i.status == status&&i.phone==this.userTmp.userphone&&i.mail==this.userTmp.mail));
+        }
+        else
+          this.zlecenia=of(response.filter(i=>i.phone==this.userTmp.userphone&&i.mail==this.userTmp.mail));
+      }
+    );
+  }
+
   public addZlecenie(name: string, surname: string, phone: string, mail: string, cat: string, probdesc: string){
     this.zlecenieTmp.name=name;
     this.zlecenieTmp.surname=surname;
@@ -78,17 +91,7 @@ export class ClientpanelComponent implements OnInit {
   }
 
 
-  public searchZlecenia(status: String){
-    this.zleceniaService.getZleceniaAll().subscribe(
-      (response: Zlecenia[])=>{
-        if(status!="") {
-          this.zlecenia=of(response.filter(i => i.status == status&&i.phone==this.userTmp.userphone&&i.mail==this.userTmp.mail));
-        }
-        else
-          this.zlecenia=of(response.filter(i=>i.phone==this.userTmp.userphone&&i.mail==this.userTmp.mail));
-      }
-    );
-  }loadScripts() {
+  loadScripts() {
     const dynamicScripts = [
       "../assets/js/jquery.min.js",
       "./assets/js/jquery.scrollex.min.js",
